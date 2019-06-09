@@ -53,8 +53,11 @@ export default {
     },
     methods:{
         generateId(){
+
         var newID = (Math.floor(Math.random() * 9999));
-        this.newPost.id = this.newID;
+        console.log('creating a new id: ' + newID);
+        this.newPost.id = newID;
+        console.log('setting a new id: ' + this.newPost.id);
         },
         generateDate() {
             var d = new Date();
