@@ -1,5 +1,8 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
+import { routes } from '../Routes';
 import Vuex from 'vuex';
+
 
 Vue.use(Vuex);
 
@@ -7,7 +10,10 @@ export const store = new Vuex.Store({
     state: {
         posts: [
                {id: 1, lastPosted: 110418, author: 'Hecton', title: 'How to hide a body', content: "Hiding a body using whitewash, small backyard and shovel it's easy...."},
-               ]
+               {id: 2, lastPosted: 90619, author: 'Dimitri', title: 'How to speak 3 languages', content: "Learning languages is fun, you just need commitment..."},
+               {id: 3, lastPosted: 100619, author: 'Hecton', title: 'How to jump', content: "First of all... Do you have legs?"},
+              
+                ]
     },
     getters: {
         getAllPosts: state => {
@@ -23,24 +29,18 @@ export const store = new Vuex.Store({
         addPost (state, payload) {
             state.posts.push(payload);
         },
-        deletePost: (state) => id => {
-         var newPosts = state.posts.find(post => post.id != id)
-         state.posts.push(newPosts);
+        deletePost (state, payload) {
+         var filtered = state.posts.filter(function(el) { return el.id != payload; });       
+         state.posts = filtered;
+    
+      
+        
         }
     },
     actions: {
         addPost (context) {
             context.commit('addPost');
         },
-
-        /*
-            we can use splice to remove the obj from the array
-            but it will be needed to pass the index, but it will require
-            change many parts in the code.
-
-            the second solution could be pass the posts.id to find the index.
-            so we can use the splice
-        */
         deletePost (context) {
             context.commit('deletePost');
         }
